@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://d077ic8oujmbl"]
+
+[ext_resource type="Script" uid="uid://bkx0gqe10ut74" path="res://code/counter.gd" id="1_sc7mx"]
+[ext_resource type="PackedScene" uid="uid://ce2vmeat14dnw" path="res://scenes/item_pos.tscn" id="2_8e5hq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1o6en"]
+size = Vector3(3, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_551ov"]
+size = Vector3(3, 1, 1)
+
+[node name="Counter" type="Node3D" unique_id=360832815]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1381617573 node_paths=PackedStringArray("ItemPOS")]
+script = ExtResource("1_sc7mx")
+ItemPOS = [NodePath("../ItemPOS")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1610073067]
+shape = SubResource("BoxShape3D_1o6en")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=200564405]
+mesh = SubResource("BoxMesh_551ov")
+
+[node name="ItemPOS" parent="." unique_id=98766678 instance=ExtResource("2_8e5hq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925058, 0)

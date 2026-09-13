@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://e0wdvhyrv8ch"]
+
+[ext_resource type="Script" uid="uid://45y6phkadanp" path="res://code/pick_counter.gd" id="1_2bsdp"]
+[ext_resource type="PackedScene" uid="uid://ce2vmeat14dnw" path="res://scenes/item_pos.tscn" id="2_2a7n6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_551ov"]
+size = Vector3(3, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1o6en"]
+size = Vector3(3, 1, 1)
+
+[node name="PickCounter" type="Node3D" unique_id=641959688]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2133349272 node_paths=PackedStringArray("ItemPOS")]
+script = ExtResource("1_2bsdp")
+ItemPOS = [NodePath("../ItemPOS"), NodePath("../ItemPOS2"), NodePath("../ItemPOS3")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=166708628]
+shape = SubResource("BoxShape3D_551ov")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1001031421]
+mesh = SubResource("BoxMesh_1o6en")
+
+[node name="ItemPOS" parent="." unique_id=98766678 instance=ExtResource("2_2a7n6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.69479156, 0)
+
+[node name="ItemPOS2" parent="." unique_id=1760163770 instance=ExtResource("2_2a7n6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1158798, 0.69479156, 0)
+
+[node name="ItemPOS3" parent="." unique_id=27635602 instance=ExtResource("2_2a7n6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95171386, 0.69479156, 0)

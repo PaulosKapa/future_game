@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ce2vmeat14dnw"]
+
+[ext_resource type="Script" uid="uid://11fbn0sqixom" path="res://code/item_pos.gd" id="1_obqrg"]
+
+[node name="ItemPOS" type="Marker3D" unique_id=98766678]
+script = ExtResource("1_obqrg")
