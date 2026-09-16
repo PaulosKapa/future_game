@@ -1,12 +1,18 @@
 [gd_scene format=3 uid="uid://dafb6j3dufhpf"]
 
 [ext_resource type="Script" uid="uid://3tkhd6bv04oi" path="res://code/item.gd" id="1_4gq7n"]
+[ext_resource type="Script" uid="uid://se2sm1dn5vtr" path="res://code/item_manager.gd" id="1_6muww"]
+[ext_resource type="PackedScene" uid="uid://bh6x1necnose1" path="res://3dAssets/test_item.gltf" id="2_s8enn"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_551ov"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_coh34"]
 
-[node name="Item" type="Node3D" unique_id=463431964]
+[node name="Item" type="Node3D" unique_id=463431964 node_paths=PackedStringArray("active_item", "item_for_repair", "spawners")]
+script = ExtResource("1_6muww")
+active_item = NodePath("RigidBody3D")
+item_for_repair = NodePath("test_item")
+spawners = [NodePath("test_item/Spawner")]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1224901485]
 script = ExtResource("1_4gq7n")
@@ -16,3 +22,8 @@ shape = SubResource("SphereShape3D_551ov")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1304156756]
 mesh = SubResource("SphereMesh_coh34")
+
+[node name="test_item" parent="." unique_id=1110262804 instance=ExtResource("2_s8enn")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Spawner" type="Marker3D" parent="test_item" unique_id=438510642]

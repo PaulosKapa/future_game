@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b7d0ntlb3tlka"]
+
+[ext_resource type="Script" uid="uid://bxhtin1fsknng" path="res://code/repair_counter.gd" id="1_w2hfx"]
+[ext_resource type="PackedScene" uid="uid://ce2vmeat14dnw" path="res://scenes/item_pos.tscn" id="2_a67i4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_551ov"]
+size = Vector3(2, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1o6en"]
+size = Vector3(2, 1, 1)
+
+[node name="RepairCounter" type="Node3D" unique_id=2002818537]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1897157743 node_paths=PackedStringArray("ItemPOS")]
+script = ExtResource("1_w2hfx")
+ItemPOS = [NodePath("../ItemPOS")]
+is_repair = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1009019276]
+shape = SubResource("BoxShape3D_551ov")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1843281714]
+mesh = SubResource("BoxMesh_1o6en")
+
+[node name="ItemPOS" parent="." unique_id=98766678 instance=ExtResource("2_a67i4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0563445, 0)

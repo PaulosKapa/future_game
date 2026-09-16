@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://b3571kvs366jp"]
 
+[ext_resource type="Script" uid="uid://i61nypae6vxf" path="res://code/inventory_manager.gd" id="1_0lw5n"]
+[ext_resource type="Script" uid="uid://dxmu7g1cktgqs" path="res://code/repair_eye_manager.gd" id="1_dp8ca"]
 [ext_resource type="Script" uid="uid://ojol6hihef1l" path="res://code/player.gd" id="1_glpr6"]
 [ext_resource type="Script" uid="uid://bo828dqefyvhh" path="res://code/drop_pick_manager.gd" id="1_my7n2"]
 [ext_resource type="Script" uid="uid://cw2f4ysdbe41g" path="res://code/camera.gd" id="2_lrhn5"]
@@ -16,7 +18,10 @@ sky_material = SubResource("ProceduralSkyMaterial_0lw5n")
 background_mode = 2
 sky = SubResource("Sky_my7n2")
 
-[node name="Player" type="Node3D" unique_id=170957818]
+[node name="Player" type="Node3D" unique_id=170957818 node_paths=PackedStringArray("holster", "eyes")]
+script = ExtResource("1_0lw5n")
+holster = NodePath("CharacterBody3D/Holster")
+eyes = NodePath("CharacterBody3D/CameraController/Camera3D/RayCast3D")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1127691300]
 script = ExtResource("1_glpr6")
@@ -38,7 +43,10 @@ environment = SubResource("Environment_lrhn5")
 target_position = Vector3(0, 0, -2)
 script = ExtResource("2_rkhd4")
 
-[node name="DropPickManager" type="Node3D" parent="." unique_id=882195262 node_paths=PackedStringArray("holster", "eyes")]
+[node name="DropPickManager" type="Node3D" parent="." unique_id=882195262 node_paths=PackedStringArray("inventory")]
 script = ExtResource("1_my7n2")
-holster = NodePath("../CharacterBody3D/Holster")
-eyes = NodePath("../CharacterBody3D/CameraController/Camera3D/RayCast3D")
+inventory = NodePath("..")
+
+[node name="RepairEyeManager" type="Node3D" parent="." unique_id=1039817263 node_paths=PackedStringArray("inventory")]
+script = ExtResource("1_dp8ca")
+inventory = NodePath("..")

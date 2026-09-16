@@ -1,4 +1,4 @@
-extends counter
+extends Counter
 
 @onready var _counter = load("res://scenes/item.tscn")
 

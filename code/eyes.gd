@@ -3,6 +3,9 @@ extends RayCast3D
 signal pick
 signal drop
 signal put
+signal repair
+signal component_interaction
+signal tooling
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,20 +18,39 @@ func _process(_delta):
 	#if the raycast is colliding
 	if(is_colliding()):
 		var collider = get_collider()
+		
 		#if you can interact
 		if(collider.has_method("get_interactible") && collider.get_interactible()):
 			#if user_interact is pressed
 			
 			#for different types 
-			if(collider is item):
+			if(collider is Item):
 				if(Input.is_action_just_pressed("user_interact")):
 					#emit pick
 					pick.emit(collider)
-			elif(collider is counter):
+					
+			elif(collider is Repairs):
+				if(Input.is_action_just_pressed("user_interact")):
+					#emit repair
+					repair.emit(collider)
+					
+			elif(collider is Counter):
+				
 				if(Input.is_action_just_pressed("user_interact")):
 					#emit put
 					put.emit(collider)
-						
+					
+			elif(collider is Component):
+				
+				if(Input.is_action_just_pressed("user_interact")):
+					#emit put
+					component_interaction.emit(collider)
+				
+			elif(collider is ToolItem):
+				if(Input.is_action_just_pressed("user_interact")):
+					#emit tooling
+					tooling.emit(collider)
+
 	#if user_drop is pressed emit drop. Not necesary to call from a raycast
 	if(Input.is_action_just_pressed("user_drop")):
 		drop.emit()

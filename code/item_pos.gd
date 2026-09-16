@@ -1,6 +1,6 @@
 extends Marker3D
 #this code only shows if a position at the desk is available for spawning an item or not
-class_name counterPOS
+class_name CounterPOS
 
 var empty = true
 
