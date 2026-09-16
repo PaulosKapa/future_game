@@ -48,13 +48,17 @@ func spawn_item(new_item):
 				#set the position and rotation the same as the ItemPOS
 				root.position = Vector3.ZERO
 				root.rotation = Vector3.ZERO
+				#it int empty anymore
+				POS.set_empty(false)
+				not_empty_POS.append(POS)
 				return POS
 			#for directly spawning
 			else:
 				POS.add_child(new_item)
-			#it int empty anymore
-			POS.set_empty(false)
-			return POS
+				not_empty_POS.append(POS)
+				#it int empty anymore
+				POS.set_empty(false)
+				return POS
 	return null
 
 

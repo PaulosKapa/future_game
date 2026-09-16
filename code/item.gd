@@ -8,7 +8,8 @@ class_name Item
 @export var needs_repair = true
 #item name
 @export var item_name = "item"
-
+#if an item can upgrade/repai
+@export var can_change = true
 
 func get_interactible():
 	return interactible

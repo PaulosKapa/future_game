@@ -12,6 +12,9 @@ size = Vector3(0.3, 0.3, 0.3)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1585531546]
 script = ExtResource("1_uonk4")
+needs_repair = false
+item_name = "tool"
+can_change = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=729183533]
 shape = SubResource("BoxShape3D_1o6en")

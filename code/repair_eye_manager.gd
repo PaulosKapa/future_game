@@ -15,7 +15,7 @@ func _ready():
 func _on_counter_interact(_counter: Node3D):
 		#for when put on a repair desk
 		if(inventory.get_item_on_hands()!=null):
-			if(inventory.get_item_on_hands() is Item):
+			if(inventory.get_item_on_hands() != ToolItem and inventory.get_item_on_hands().can_change):
 				if(_counter.get_init_repairing() == false):
 					print(inventory.get_item_on_hands())
 					inventory.get_item_on_hands().set_interactible(true)
@@ -38,6 +38,7 @@ func _on_counter_interact(_counter: Node3D):
 
 #for interacting with a component
 func _on_component_interact(_component: Node3D):
+
 	if(_component.needs_tool!=null):
 		
 		if(inventory.get_item_on_hands() && inventory.get_item_on_hands().item_name==_component.needs_tool):

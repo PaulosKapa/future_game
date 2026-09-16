@@ -24,8 +24,6 @@ func pick_up_item(_item: Node3D):
 		_item.angular_velocity = Vector3.ZERO
 		#disable physics collisions
 		_item.freeze = true
-		#in case it was picked up from a repairing station
-		_item.set_repairing(false)
 		#reparent it to the holster
 		root.reparent(inventory.holster)
 		#set the position and rotation the same as the holster
@@ -73,13 +71,13 @@ func _on_item_dropped():
 	
 #for putting stuff to counter
 func _on_counter_put(_counter: Node3D):
-	#if there is something on the character's hands
-	if(inventory.get_item_on_hands() !=null ):
+	#if there is something on the character's hands and there is empty space on the counter
+	if(inventory.get_item_on_hands() !=null && len(_counter.ItemPOS)> len(_counter.not_empty_POS)):
 		
 		inventory.get_item_on_hands().freeze = true
 		#enablle raycast collisions
 		inventory.get_item_on_hands().get_child(0).set_deferred("disabled", false)
 		inventory.get_item_on_hands().set_interactible(true)
 		#add the item from the hands to the counter
-		_counter.not_empty_POS.append(_counter.spawn_item(inventory.get_item_on_hands()))
+		_counter.spawn_item(inventory.get_item_on_hands())
 		inventory.set_item_on_hands(null)

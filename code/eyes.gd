@@ -22,9 +22,12 @@ func _process(_delta):
 		#if you can interact
 		if(collider.has_method("get_interactible") && collider.get_interactible()):
 			#if user_interact is pressed
-			
+			if(collider is ToolItem):
+				if(Input.is_action_just_pressed("user_interact")):
+					#emit tooling
+					tooling.emit(collider)
 			#for different types 
-			if(collider is Item):
+			elif(collider is Item):
 				if(Input.is_action_just_pressed("user_interact")):
 					#emit pick
 					pick.emit(collider)
@@ -46,10 +49,7 @@ func _process(_delta):
 					#emit put
 					component_interaction.emit(collider)
 				
-			elif(collider is ToolItem):
-				if(Input.is_action_just_pressed("user_interact")):
-					#emit tooling
-					tooling.emit(collider)
+			
 
 	#if user_drop is pressed emit drop. Not necesary to call from a raycast
 	if(Input.is_action_just_pressed("user_drop")):
