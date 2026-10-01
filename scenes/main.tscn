@@ -1,37 +1,55 @@
 [gd_scene format=3 uid="uid://c2kx4qkv5psrq"]
 
-[ext_resource type="Script" uid="uid://dfdv3h23aiqh3" path="res://code/main.gd" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://d077ic8oujmbl" path="res://scenes/counter.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://c8m3rtikwbha6" path="res://scenes/repair_building.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://e0wdvhyrv8ch" path="res://scenes/pick_counter.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://b7d0ntlb3tlka" path="res://scenes/repair_counter.tscn" id="4_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://cbmumf0jq887x" path="res://scenes/tool.tscn" id="5_tbgi4"]
+[ext_resource type="VoxelGIData" uid="uid://b8v44w71utyg6" path="res://materials/main.VoxelGI_data.res" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://b3571kvs366jp" path="res://scenes/character.tscn" id="5_tefeu"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1o6en"]
-size = Vector3(10, 1, 10)
+[sub_resource type="PlaneMesh" id="PlaneMesh_ksm3a"]
+size = Vector2(20, 20)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_coh34"]
-size = Vector2(10, 10)
+[sub_resource type="BoxShape3D" id="BoxShape3D_551ov"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ksm3a"]
+
+[sub_resource type="Sky" id="Sky_551ov"]
+sky_material = SubResource("ProceduralSkyMaterial_ksm3a")
+
+[sub_resource type="Environment" id="Environment_1o6en"]
+background_mode = 2
+sky = SubResource("Sky_551ov")
+glow_enabled = true
 
 [node name="Node3D" type="Node3D" unique_id=1324663201]
-script = ExtResource("1_o5qli")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=754034954]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1193367080]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=530377206]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1235852926]
+mesh = SubResource("PlaneMesh_ksm3a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2073897550]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_1o6en")
+shape = SubResource("BoxShape3D_551ov")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=681408116]
-mesh = SubResource("PlaneMesh_coh34")
-
-[node name="PickCounter" parent="." unique_id=641959688 instance=ExtResource("2_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49440312, -3.2322674)
-
-[node name="Counter" parent="." unique_id=360832815 instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5036721, 3)
+[node name="repair_building" parent="." unique_id=1990028360 instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 0, 0.008603692, 0)
 
 [node name="RepairCounter" parent="." unique_id=2002818537 instance=ExtResource("4_jyhfs")]
-transform = Transform3D(0.04227387, 0, -0.99910605, 0, 1, 0, 0.99910605, 0, 0.04227387, -3.1809616, 0.51078534, 0)
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, -3.92588, 0.28544438, -6.481302)
 
-[node name="tool" parent="." unique_id=701883516 instance=ExtResource("5_tbgi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8916662, 0.33223498, 0)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="RepairCounter" unique_id=1977513536]
+environment = SubResource("Environment_1o6en")
+
+[node name="PickCounter" parent="." unique_id=641959688 instance=ExtResource("2_sugp2")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.47858316, 0)
+
+[node name="VoxelGI" type="VoxelGI" parent="." unique_id=1747819575]
+data = ExtResource("5_tbgi4")
+
+[node name="Player" parent="." unique_id=170957818 instance=ExtResource("5_tefeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3281348, 1.1186037)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1091916507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.883955, 0)

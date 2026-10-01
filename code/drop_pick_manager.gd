@@ -11,10 +11,7 @@ func _ready():
 	inventory.eyes.pick.connect(_on_item_picked)
 	inventory.eyes.drop.connect(_on_item_dropped)
 	inventory.eyes.put.connect(_on_counter_put)
-
-
-
-
+	
 
 #when you pick up an item
 func pick_up_item(_item: Node3D):
@@ -81,3 +78,4 @@ func _on_counter_put(_counter: Node3D):
 		#add the item from the hands to the counter
 		_counter.spawn_item(inventory.get_item_on_hands())
 		inventory.set_item_on_hands(null)
+		

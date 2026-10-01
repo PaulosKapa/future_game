@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://25cdf73ow406"]
+
+[ext_resource type="PackedScene" uid="uid://byq41vvq2ayhk" path="res://3dAssets/door_shop.gltf" id="1_hpvv5"]
+[ext_resource type="Script" uid="uid://g3880o1nogg5" path="res://code/door.gd" id="1_uvdjg"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_83dcw"]
+points = PackedVector3Array(0.77044386, 1.6401824, 1.328249, 0.77044386, 1.6401824, -1.3822303, -0.78469104, 1.6405095, 1.3279836, 0.77044386, -1.7035626, 1.328249, -0.7486136, 1.6401824, -1.3822303, 0.77044386, -1.7035626, -1.3822303, -0.7486136, -1.7035626, 1.3279836, -0.67630655, -1.7035626, -1.3822303)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_uvdjg"]
+points = PackedVector3Array(0.0944137, 2.937427, 0.86697435, -0.0873813, 2.937427, 0.86697435, 0.0944137, -3.0428896, 0.86697435, 0.0944137, 2.937427, -1.1260118, -0.0873813, 2.937427, -1.1260118, -0.0873813, -3.0428896, 0.86697435, 0.0944137, -3.0428896, -1.1260118, -0.0873813, -3.0428896, -1.1260118)
+
+[node name="door" type="Node3D" unique_id=2083320599]
+
+[node name="Hinge" type="HingeJoint3D" parent="." unique_id=903690141]
+transform = Transform3D(1, 0, 0, 0, 1.192488e-08, 0.99999994, 0, -0.99999994, 1.192488e-08, 0.024416685, 0.071445346, 0.6202137)
+node_a = NodePath("../Door_area")
+node_b = NodePath("../StaticBody3D")
+angular_limit/enable = true
+
+[node name="Door_area" type="RigidBody3D" parent="." unique_id=1183366760 node_paths=PackedStringArray("hinge")]
+collision_layer = 8
+collision_mask = 15
+script = ExtResource("1_uvdjg")
+hinge = NodePath("../Hinge")
+
+[node name="Area3D" type="Area3D" parent="Door_area" unique_id=1969501711]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door_area/Area3D" unique_id=1598580236]
+transform = Transform3D(0.000987306, 0, 0, 0, 0.5187168, -4.80671e-08, 0, 7.457598e-08, 0.2154905, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_83dcw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door_area" unique_id=420719631]
+transform = Transform3D(-0.031421427, 0, 0, 0, 0.72021997, -4.058249e-08, 0, 6.296363e-08, 0.46420956, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_83dcw")
+
+[node name="door_shop" parent="Door_area" unique_id=601919294 instance=ExtResource("1_hpvv5")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=804553127]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1637129605]
+transform = Transform3D(0.43059742, 0, 0, 0, 0.43059742, 0, 0, 0, 0.040841896, 0, 0, 0.6625742)
+shape = SubResource("ConvexPolygonShape3D_uvdjg")
+
+[connection signal="body_entered" from="Door_area/Area3D" to="Door_area" method="_on_area_3d_body_entered"]
+
+[editable path="Door_area/door_shop"]

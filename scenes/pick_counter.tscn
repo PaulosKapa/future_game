@@ -2,12 +2,11 @@
 
 [ext_resource type="Script" uid="uid://45y6phkadanp" path="res://code/pick_counter.gd" id="1_2bsdp"]
 [ext_resource type="PackedScene" uid="uid://ce2vmeat14dnw" path="res://scenes/item_pos.tscn" id="2_2a7n6"]
+[ext_resource type="Material" uid="uid://2k0fvavkpvqg" path="res://materials/wood.tres" id="3_fouyg"]
+[ext_resource type="PackedScene" uid="uid://h1e470t3qx8o" path="res://3dAssets/counter.gltf" id="3_uwtoe"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_551ov"]
-size = Vector3(3, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_1o6en"]
-size = Vector3(3, 1, 1)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_uwtoe"]
+points = PackedVector3Array(0.6518438, -1.0532873, -3.4103873, 1.5133218, 1, 3.1601317, -0.9555312, 1, 3.1601317, 0.6518438, -1.0532873, 3.4103873, -1.0532873, 0.6515309, -3.4103873, 1.5133218, 1, -3.1601317, 1, -0.94926524, 3.0775168, 1.6110778, 0.6515309, -3.3035622, -1.0532873, 0.6515309, 3.4103873, -0.9555312, 1, -3.1601317, 1.6110778, 0.75814724, 3.4103873, 1, -0.94926524, -3.0775168, 1.6110778, 0.75814724, -3.4103873, 1.6110778, 0.6515309, 3.3035622)
 
 [node name="PickCounter" type="Node3D" unique_id=641959688]
 
@@ -15,17 +14,23 @@ size = Vector3(3, 1, 1)
 script = ExtResource("1_2bsdp")
 ItemPOS = [NodePath("../ItemPOS"), NodePath("../ItemPOS2"), NodePath("../ItemPOS3")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=166708628]
-shape = SubResource("BoxShape3D_551ov")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=244436418]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.08154118, 0, 1.2744282)
+shape = SubResource("ConvexPolygonShape3D_uwtoe")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1001031421]
-mesh = SubResource("BoxMesh_1o6en")
+[node name="counter" parent="StaticBody3D" unique_id=1343245593 instance=ExtResource("3_uwtoe")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.08154118, 0, 1.2744282)
+
+[node name="Cube" parent="StaticBody3D/counter" index="0" unique_id=1445311194]
+material_override = ExtResource("3_fouyg")
 
 [node name="ItemPOS" parent="." unique_id=98766678 instance=ExtResource("2_2a7n6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.69479156, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5255472, 0.69858384, 1.1520319)
 
 [node name="ItemPOS2" parent="." unique_id=1760163770 instance=ExtResource("2_2a7n6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1158798, 0.69479156, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2853932, 0.69858384, 1.1520319)
 
 [node name="ItemPOS3" parent="." unique_id=27635602 instance=ExtResource("2_2a7n6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95171386, 0.69479156, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.59654045, 0.69858384, 1.1520319)
+
+[editable path="StaticBody3D/counter"]

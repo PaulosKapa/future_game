@@ -6,6 +6,7 @@ signal put
 signal repair
 signal component_interaction
 signal tooling
+signal open_door
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,7 +50,20 @@ func _process(_delta):
 					#emit put
 					component_interaction.emit(collider)
 				
+<<<<<<< Updated upstream
 			
+=======
+			elif(collider is ToolItem):
+				if(Input.is_action_just_pressed("user_interact")):
+					#emit tooling
+					tooling.emit(collider)
+			
+			elif(collider is Door):
+				
+				if(Input.is_action_just_pressed("user_interact")):
+					#emit tooling
+					open_door.emit(collider)
+>>>>>>> Stashed changes
 
 	#if user_drop is pressed emit drop. Not necesary to call from a raycast
 	if(Input.is_action_just_pressed("user_drop")):

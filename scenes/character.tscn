@@ -6,17 +6,9 @@
 [ext_resource type="Script" uid="uid://bo828dqefyvhh" path="res://code/drop_pick_manager.gd" id="1_my7n2"]
 [ext_resource type="Script" uid="uid://cw2f4ysdbe41g" path="res://code/camera.gd" id="2_lrhn5"]
 [ext_resource type="Script" uid="uid://c8fmwxrwv0dgc" path="res://code/eyes.gd" id="2_rkhd4"]
+[ext_resource type="Script" uid="uid://bl2ugxbohx68b" path="res://code/door_manager.gd" id="7_2cgup"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1o6en"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0lw5n"]
-
-[sub_resource type="Sky" id="Sky_my7n2"]
-sky_material = SubResource("ProceduralSkyMaterial_0lw5n")
-
-[sub_resource type="Environment" id="Environment_lrhn5"]
-background_mode = 2
-sky = SubResource("Sky_my7n2")
 
 [node name="Player" type="Node3D" unique_id=170957818 node_paths=PackedStringArray("holster", "eyes")]
 script = ExtResource("1_0lw5n")
@@ -33,14 +25,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38849795, 0.29240555, -1.37
 shape = SubResource("CapsuleShape3D_1o6en")
 
 [node name="CameraController" type="Node3D" parent="CharacterBody3D" unique_id=1959800745]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("2_lrhn5")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CameraController" unique_id=2097649640]
-environment = SubResource("Environment_lrhn5")
 
 [node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/CameraController/Camera3D" unique_id=2030663450]
 target_position = Vector3(0, 0, -2)
+collision_mask = 15
 script = ExtResource("2_rkhd4")
 
 [node name="DropPickManager" type="Node3D" parent="." unique_id=882195262 node_paths=PackedStringArray("inventory")]
@@ -49,4 +41,8 @@ inventory = NodePath("..")
 
 [node name="RepairEyeManager" type="Node3D" parent="." unique_id=1039817263 node_paths=PackedStringArray("inventory")]
 script = ExtResource("1_dp8ca")
+inventory = NodePath("..")
+
+[node name="DoorManager" type="Node3D" parent="." unique_id=1964746331 node_paths=PackedStringArray("inventory")]
+script = ExtResource("7_2cgup")
 inventory = NodePath("..")
